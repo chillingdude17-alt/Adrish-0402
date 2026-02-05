@@ -1,45 +1,22 @@
-window.addEventListener("load", () => {
-  document.querySelectorAll(".fade").forEach(el => {
-    el.classList.add("active");
-  });
+document.getElementById("rewardBtn")?.addEventListener("click", () => {
+  window.location.href = "question.html";
 });
 
-// Floating hearts
-const heartsContainer = document.querySelector(".hearts");
-if (heartsContainer) {
-  setInterval(() => {
-    const heart = document.createElement("span");
-    heart.innerHTML = "💜";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 20 + 12 + "px";
-    heartsContainer.appendChild(heart);
-    setTimeout(() => heart.remove(), 8000);
-  }, 500);
-}
+let tries = 0;
+const runaway = document.getElementById("runawayBtn");
 
-function goNext() {
-  window.location.href = "question.html";
-}
+runaway?.addEventListener("mouseenter", () => {
+  tries++;
+  if (tries < 4) {
+    runaway.style.transform = `translate(${Math.random()*200-100}px, ${Math.random()*200-100}px)`;
+  } else {
+    runaway.onclick = () => {
+      alert("Kumro Potash ekta! You heb NOOO choice, Imma your Valentine 💜");
+      window.location.href = "rewards.html";
+    };
+  }
+});
 
-function yesClicked() {
+function goReward() {
   window.location.href = "rewards.html";
-}
-
-// No button chaos
-let dodgeCount = 0;
-const noBtn = document.getElementById("noBtn");
-
-if (noBtn) {
-  noBtn.addEventListener("mouseover", () => {
-    if (dodgeCount < 3) {
-      noBtn.style.left = Math.random() * (window.innerWidth - 300) + "px";
-      noBtn.style.top = Math.random() * (window.innerHeight - 150) + "px";
-      dodgeCount++;
-    }
-  });
-
-  noBtn.addEventListener("click", () => {
-    alert("You heb NOOO choice 😤💜");
-    window.location.href = "rewards.html";
-  });
 }
